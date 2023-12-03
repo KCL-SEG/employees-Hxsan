@@ -1,30 +1,13 @@
 """Employee pay calculator."""
 """ENTER YOUR SOLUTION HERE!"""
 
-class Employee:
-    def __init__(self, name, commissionBonus, rateAmount):
-        self.name = name
-        self.commissionBonus = commissionBonus
-        self.rateAmount = rateAmount
-
-    def get_pay(self):
-        return None
-
-    def Statement(self):
-        if self.commissionBonus == 1:
-            return f' and receives a bonus commission of {self.rateAmount}'
-        elif self.commissionBonus > 1:
-            return f' and receives a commission for {self.commissionBonus} contract(s) at {self.rateAmount}/contract'
-        else:
-            return ""
-
-class MonthlyEmployee(Employee):
+class MonthlyEmployee():
     def __init__(self, name, salary, commissionBonus, rateAmount):
-        super().__init__(name, commissionBonus, rateAmount)
         self.name = name
         self.salary = salary
         self.commissionBonus = commissionBonus
         self.rateAmount = rateAmount
+        self.statement = ""
 
     def pay(self):
         total = self.salary
@@ -32,18 +15,25 @@ class MonthlyEmployee(Employee):
 
     def get_pay(self):
         return self.pay()
+    
+    def Statement(self):
+        if self.commissionBonus == 1:
+            self.statement = f" and receives a bonus commission of {str(self.rateAmount)}"
+        elif self.commissionBonus > 1:
+            self.statement = f" and receives a commission for {str(self.commissionBonus)} contract(s) at {str(self.rateAmount)}/contract"
 
     def __str__(self):
-        return f'{self.name} works on a monthly salary of {self.salary}{self.Statement()}. Their total pay is {self.get_pay()}'
+        self.Statement()
+        return f'{str(self.name)} works on a monthly salary of {str(self.salary)}{str(self.statement)}. Their total pay is {str(self.get_pay())}.'
 
-class ContractEmployee(Employee):
+class ContractEmployee():
     def __init__(self, name, hours, rate, commissionBonus, rateAmount):
-        super().__init__(name, commissionBonus, rateAmount)
         self.name = name
         self.hours = hours
         self.rate = rate
         self.commissionBonus = commissionBonus
         self.rateAmount = rateAmount
+        self.statement = ""
 
     def pay(self):
         base = self.hours * self.rate
@@ -56,8 +46,15 @@ class ContractEmployee(Employee):
     def get_pay(self):
         return self.pay()
     
+    def Statement(self):
+        if self.commissionBonus == 1:
+            self.statement =  f' and receives a bonus commission of {str(self.rateAmount)}'
+        elif self.commissionBonus > 1:
+            self.statement =  f' and receives a commission for {str(self.commissionBonus)} contract(s) at {str(self.rateAmount)}/contract'
+    
     def __str__(self):
-        return f'{self.name} works on a contract of {self.hours} hours at {self.rate}/hour{self.Statement()}. Their total pay is {self.get_pay()}'
+        self.Statement()
+        return f"{str(self.name)} works on a contract of {str(self.hours)} hours at {str(self.rate)}/hour{str(self.statement)}. Their total pay is {str(self.get_pay())}."
 
 
 # Billie works on a monthly salary of 4000.  Their total pay is 4000.

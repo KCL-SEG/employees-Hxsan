@@ -7,6 +7,9 @@ class Employee:
         self.commissionBonus = commissionBonus
         self.rateAmount = rateAmount
 
+    def get_pay(self):
+        return None
+
     def Statement(self):
         if self.commissionBonus == 1:
             return f' and receives a bonus commission of {self.rateAmount}'
@@ -23,18 +26,16 @@ class MonthlyEmployee(Employee):
         self.commissionBonus = commissionBonus
         self.rateAmount = rateAmount
 
-
     def pay(self):
-        total = self.salary + self.commissionBonus*self.rateAmount
-
+        total = self.salary
         return total
-    
+
     def get_pay(self):
         return self.pay()
 
     def __str__(self):
         return f'{self.name} works on a monthly salary of {self.salary}{self.Statement()}. Their total pay is {self.get_pay()}'
-    
+
 class ContractEmployee(Employee):
     def __init__(self, name, hours, rate, commissionBonus, rateAmount):
         super().__init__(name, commissionBonus, rateAmount)
@@ -57,7 +58,7 @@ class ContractEmployee(Employee):
     
     def __str__(self):
         return f'{self.name} works on a contract of {self.hours} hours at {self.rate}/hour{self.Statement()}. Their total pay is {self.get_pay()}'
-    
+
 
 # Billie works on a monthly salary of 4000.  Their total pay is 4000.
 billie = MonthlyEmployee('Billie', 4000, 0, 0)
